@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210625180344_AddDuplexDetailToDB")]
-    partial class AddDuplexDetailToDB
+    [Migration("20210626183949_AddDetailOfDuplexToDB")]
+    partial class AddDetailOfDuplexToDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace HouseRent.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HouseRent.Models.DuplexDetail", b =>
+            modelBuilder.Entity("HouseRent.Models.DetailOfDuplex", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -38,6 +38,10 @@ namespace HouseRent.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("DuplexName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Photo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -47,7 +51,45 @@ namespace HouseRent.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DuplexDetails");
+                    b.ToTable("DetailOfDuplexs");
+                });
+
+            modelBuilder.Entity("HouseRent.Models.DetailOfFlat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BathNumber")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("CarParking")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FlatId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FlatName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoomNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlatId");
+
+                    b.ToTable("DetailOfFlats");
                 });
 
             modelBuilder.Entity("HouseRent.Models.Flat", b =>
@@ -64,38 +106,6 @@ namespace HouseRent.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Flats");
-                });
-
-            modelBuilder.Entity("HouseRent.Models.FlatDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BathNumber")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("CarParking")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FlatId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Photo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoomNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FlatId");
-
-                    b.ToTable("FlatDetails");
                 });
 
             modelBuilder.Entity("HouseRent.Models.PropertyType", b =>
@@ -314,7 +324,7 @@ namespace HouseRent.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("HouseRent.Models.FlatDetail", b =>
+            modelBuilder.Entity("HouseRent.Models.DetailOfFlat", b =>
                 {
                     b.HasOne("HouseRent.Models.Flat", "Flat")
                         .WithMany()

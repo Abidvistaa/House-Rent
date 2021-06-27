@@ -15,8 +15,9 @@ namespace HouseRent.Data
         }
         public DbSet<PropertyType> PropertyTypes { get; set; }
         public DbSet<Flat> Flats { get; set; }
-        public DbSet<FlatDetail> FlatDetails { get; set; }
-        public DbSet<DuplexDetail> DuplexDetails { get; set; }
+        public DbSet<DetailOfFlat> DetailOfFlats { get; set; }
+        public DbSet<DetailOfDuplex> DetailOfDuplexs { get; set; }
+
 
     }
 }

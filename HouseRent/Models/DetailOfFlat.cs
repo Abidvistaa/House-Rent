@@ -7,20 +7,24 @@ using System.Threading.Tasks;
 
 namespace HouseRent.Models
 {
-    public class FlatDetail
+    public class DetailOfFlat
     {
         public int Id { get; set; }
         [Required]
-        
+        public string FlatName { get; set; }
+        [Required]
         public int FlatId { get; set; }
         [ForeignKey("FlatId")]
         public Flat Flat { get; set; }
         [Required]
         public int RoomNumber { get; set; }
+        [Required]
         public int BathNumber { get; set; }
+        [Required]
         public bool CarParking { get; set; }
+        [Required]
         public string Description { get; set; }
+        [Required]
         public string Photo { get; set; }
-
     }
 }
