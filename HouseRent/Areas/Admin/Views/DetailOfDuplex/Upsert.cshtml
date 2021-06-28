@@ -1,0 +1,107 @@
+﻿@model HouseRent.Models.DetailOfDuplex
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var title = "Create Detail of Duplex";
+}
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row p-3 border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.Id != 0)
+        {
+            title = "Edit Detail of Duplex";
+            <input type="hidden" asp-for="Id" />
+        }
+        <div class="col-12 border-bottom ">
+            <h2 class="text-primary" style="border-color:aqua">@title</h2>
+        </div>
+
+        <div class="col-8 pt-4">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="DuplexName"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="DuplexName" class="form-control" />
+                    <span asp-validation-for="DuplexName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="RoomNumber"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="RoomNumber" class="form-control" />
+                    <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="BathNumber"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="BathNumber" class="form-control" />
+                    <span asp-validation-for="BathNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Parking</label>
+                </div>
+                <div class="col-8">
+                    <input type="checkbox" asp-for="CarParking" class="form-control" />
+                    <span asp-validation-for="CarParking" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Description</label>
+                </div>
+                <div class=" col-8">
+                    <input type="text" asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label>Photo</label>
+                </div>
+                <div class=" col-8">
+                    <input type="file" asp-for="Photo" name="image" class="form-control" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if (Model.Id != 0)
+                    {
+                        <div class="form-group offset-5" style="padding-left:50px">
+                            <a asp-action="Index" class="btn btn-dark">Back To List</a>
+                            <input type="submit" value="Update" class="btn btn-success" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group offset-6" style="padding-left:25px">
+                            <a asp-action="Index" class="btn btn-dark">Back To List</a>
+                            <input type="submit" value="Create" class="btn btn-success" />
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+        @if (Model.Id != 0)
+        {
+            <div class="offset-1">
+                <img src="@Model.Photo" style="height:250px; width:250px;" />
+            </div>
+        }
+
+    </div>
+</form>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

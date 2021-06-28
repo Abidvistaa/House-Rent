@@ -1,0 +1,52 @@
+﻿@model IEnumerable<HouseRent.Models.DetailOfDuplex>
+@{
+   
+    ViewData["Title"] = "Index";
+}
+
+<style>    body {
+        background-color: #ffcce0;
+    }
+</style>
+<br />
+
+<h2 class=" text-dark">About Duplex Index</h2>
+<div class="offset-10" style="padding-left:50px">
+    <a asp-action="Upsert" class="btn btn-outline-info" ><i><i class="fas fa-plus"></i></i>&nbsp; New Duplex</a>
+</div>
+<br />
+<br />
+<div style="">
+    <table id="tblData" class="table table-striped table-bordered "  >
+        <thead style="background-color:peru">
+            <tr class="table-info ">
+                <th>Duplex Name</th>
+                <th>Room</th>
+                <th>Bath</th>
+                <th>Car Parking</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+    
+</div>
+
+@section Scripts{
+    <script src="~/js/detailOfDuplex.js"></script>
+    
+    <script type="text/javascript">
+                $(function () {
+                var save = '@TempData["save"]'
+                var edit = '@TempData["edit"]'
+
+                if (save != '') {
+                    alertify.success(save);
+                }
+                if (edit != '') {
+                     alertify.success(edit);
+                }
+        })
+    </script>
+}
+
+

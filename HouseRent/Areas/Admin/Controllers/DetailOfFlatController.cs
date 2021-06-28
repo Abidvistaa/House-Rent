@@ -92,11 +92,11 @@ namespace HouseRent.Areas.Admin.Controllers
                     var uploads = Path.Combine(webRootPath, @"images");
                     string filename = Guid.NewGuid().ToString();
                     var extension = Path.GetExtension(files[0].FileName);
-
-                    if (detailOfFlat.Photo != null)
+                    var objFromDB = _db.DetailOfFlats.Where(x => x.Id == id).FirstOrDefault<DetailOfFlat>();
+                    if (objFromDB.Photo != null)
                     {
                         //this is an edit and we need to remove old image
-                        var imagePath = Path.Combine(webRootPath, detailOfFlat.Photo.TrimStart('\\'));
+                        var imagePath = Path.Combine(webRootPath, objFromDB.Photo.TrimStart('\\'));
                         if (System.IO.File.Exists(imagePath))
                         {
                             System.IO.File.Delete(imagePath);
@@ -106,8 +106,8 @@ namespace HouseRent.Areas.Admin.Controllers
                     {
                         files[0].CopyTo(fileStreams);
                     }
-                    detailOfFlat.Photo = @"\images\" + filename + extension;
-                    _db.DetailOfFlats.Update(detailOfFlat);
+                    objFromDB.Photo = @"\images\" + filename + extension;
+                    _db.DetailOfFlats.Update(objFromDB);
                     //_db.Entry(detailOfFlat).State = EntityState.Modified;
                     _db.SaveChanges();
                     TempData["edit"] = "Updated successfully";
@@ -130,11 +130,14 @@ namespace HouseRent.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             var objFromDB = _db.DetailOfFlats.Where(x => x.Id == id).FirstOrDefault<DetailOfFlat>();
-            string webRootPath = _he.WebRootPath;
-            var imagePath = Path.Combine(webRootPath, objFromDB.Photo.TrimStart('\\'));
-            if (System.IO.File.Exists(imagePath))
+            if (objFromDB.Photo!=null)
             {
-                System.IO.File.Delete(imagePath);
+                string webRootPath = _he.WebRootPath;
+                var imagePath = Path.Combine(webRootPath, objFromDB.Photo.TrimStart('\\'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
             }
             _db.DetailOfFlats.Remove(objFromDB);
             //_db.Remove(objFromDB);

@@ -21,7 +21,7 @@ namespace HouseRent.Models
         public bool CarParking { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
+
         public string Photo { get; set; }
     }
 }
