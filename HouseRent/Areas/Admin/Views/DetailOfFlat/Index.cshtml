@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HouseRent.Models.DetailOfFlat>
+@{
+   
+    ViewData["Title"] = "Index";
+}
+
+<style>    body {
+        background-color: #d1d1e0;
+    }
+</style>
+<br />
+
+<h2 class=" text-white">About Flats Index</h2>
+<div class="offset-10" style="padding-left:70px">
+    <a asp-action="Create" class="btn btn-outline-light" ><i><i class="fas fa-plus"></i></i>&nbsp; New Flat</a>
+</div>
+<br />
+<br />
+<div style="">
+    <table id="tblData" class="table table-striped table-bordered "  >
+        <thead style="background-color:peru">
+            <tr class="table-info ">
+                <th>Flat Name</th>
+                <th>Floor</th>
+                <th>Room</th>
+                <th>Bath</th>
+                <th>Car Parking</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+    
+</div>
+
+@section Scripts{
+    <script src="~/js/detailOfFlat.js"></script>
+    
+    <script type="text/javascript">
+                $(function () {
+                var save = '@TempData["save"]'
+                var edit = '@TempData["edit"]'
+
+                if (save != '') {
+                    alertify.success(save);
+                }
+                if (edit != '') {
+                     alertify.success(edit);
+                }
+        })
+    </script>
+}
+
+

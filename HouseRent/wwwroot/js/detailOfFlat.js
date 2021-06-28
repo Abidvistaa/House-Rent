@@ -6,21 +6,27 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            "url": "/Admin/Flat/GetAll"
+            "url": "/Admin/DetailofFlat/GetAll"
 
         },
         "columns": [
-            { "data": "floor" },
+            { "data": "flatName" },
+            { "data": "flat.floor" },
+            { "data": "roomNumber" },
+            { "data": "bathNumber" },
+            { "data": "carParking" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `
                             <div class="text-center">
-                                <a href="/Admin/Flat/Edit/${data}" class="text-success style" style="cursor:pointer">
+                                <a href="/Admin/DetailofFlat/Edit/${data}" class="btn-success text-white style" style="cursor:pointer">
                                     <i class="far fa-edit"></i> 
                                 </a>&nbsp
-                                
-                                <a onclick=Delete("/Admin/Flat/Delete/${data}") class=" text-danger style" style="cursor:pointer">
+                                <a href="/Admin/SpecialTag/Details/${data}" class="btn-primary text-white style" style="cursor:pointer">
+                                    <i class="fas fa-list"></i>
+                                </a>&nbsp
+                                <a onclick=Delete("/Admin/DetailofFlat/Delete/${data}") class=" btn-danger text-white style" style="cursor:pointer">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
                             </div>
