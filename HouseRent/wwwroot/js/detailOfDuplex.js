@@ -14,6 +14,7 @@ function loadDataTable() {
             { "data": "roomNumber" },
             { "data": "bathNumber" },
             { "data": "carParking" },
+            { "data": "price" },
             {
                 "data": "id",
                 "render": function (data) {

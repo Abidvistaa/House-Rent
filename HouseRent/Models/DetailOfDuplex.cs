@@ -23,5 +23,6 @@ namespace HouseRent.Models
         public string Description { get; set; }
 
         public string Photo { get; set; }
+        public int Price { get; set; }
     }
 }

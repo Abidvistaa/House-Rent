@@ -1,19 +1,18 @@
-﻿@model IEnumerable<HouseRent.Models.DetailOfFlat>
+﻿@model IEnumerable<HouseRent.Models.DetailOfDuplex>
 
 <link href="~/css/home.css" rel="stylesheet" />
 
 <div class="row">
-    <div class="">
+    <div id="">
         <nav class="navbar navbar-success bg-success">
             <form class="container-fluid justify-content-start">
                 <a class="btn btn-outline-danger text-white" asp-area="Customer" asp-controller="Home" asp-action="Index">Flat</a>&nbsp;
                 <a class="btn btn-outline-danger text-white" asp-area="Customer" asp-controller="Home" asp-action="Indexx">Duplex</a>
             </form>
         </nav>
-    </div>
-    
-    <div id="myDIV" class="text-dark offset- text-center text-right" style="background-color:coral;width:100px">
-        <h3><label>Flat</label></h3>
+    </div >
+    <div id="myDIV1" class="text-dark offset- text-center text-right" style="background-color:blueviolet;width:100px">
+        <h3><label >Duplex</label></h3>
     </div>
 </div>
 <br />
@@ -24,24 +23,24 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h3 class="text-center">
-                        <label style="font-size: 18px; color: #006699;">@item.FlatName</label>
+                        <label style="font-size: 18px; color: #006699; ">@item.DuplexName</label>
                     </h3>
                 </div>
                 <div class="card-img-wrapper">
-                    <img src="@item.Photo" class="p-2 " style="height: 250px;width:250px" />
-                
-                <ul class=" list-inline text-center over-img animate">
-                    <li class=" list-inline-item ">
-                        <button class="btn btn-primary text-white"><i class="fas fa-info-circle"></i></button>
-                    </li>
-                    <li class=" list-inline-item ">
-                        <button class="btn btn-success text-white"><i class="far fa-address-book"></i></button>
-                    </li>
-                </ul>
+                    <img src="@item.Photo" class="p-2" style="height: 250px;width:250px" />
+
+                    <ul class=" list-inline text-center over-img animate">
+                        <li class=" list-inline-item ">
+                            <button class="btn btn-primary text-white"><i class="fas fa-info-circle"></i></button>
+                        </li>
+                        <li class=" list-inline-item ">
+                            <button class="btn btn-success text-white"><i class="far fa-address-book"></i></button>
+                        </li>
+                    </ul>
                 </div>
-                <div class="card-header text-center">
+                <div class="card-header text-center ">
                     <div class="">
-                       <label style="color:tomato;font-size:14px"><b>Price : @item.Price</b></label>
+                        <label style="color:tomato;font-size:14px"><b>Price : @item.Price</b></label>
                     </div>
                     <div class="btn-group">
                         <label style="color: #336600; font-size: 14px "><b>Room : @item.RoomNumber</b></label>
@@ -51,4 +50,3 @@
         </div>
     }
 </div>
-

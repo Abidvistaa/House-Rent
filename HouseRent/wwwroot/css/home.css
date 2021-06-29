@@ -1,0 +1,54 @@
+﻿body {
+}
+
+
+.card:hover img{
+    transform: scale(1.2,1.2);
+    transition: 500ms;
+    transition-timing-function: ease-out;
+}
+
+.card-img-wrapper {
+    overflow: hidden;
+    position: relative;
+    
+}
+.over-img {
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+.card-img-wrapper:hover .over-img {
+    bottom: 0;
+}
+
+
+
+.animate{
+    transition: all,300ms;
+    transition-timing-function:ease-in-out;
+}
+
+#myDIV {
+    animation: mymove 5s infinite;
+}
+
+@keyframes mymove {
+    50% {
+        box-shadow: 10px 20px 30px coral;
+    }
+}
+
+#myDIV1 {
+    animation: mymove1 5s infinite;
+}
+
+@keyframes mymove1 {
+    50% {
+        box-shadow: 10px 20px 30px blueviolet;
+    }
+}
