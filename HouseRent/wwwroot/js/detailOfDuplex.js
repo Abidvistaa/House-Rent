@@ -23,9 +23,7 @@ function loadDataTable() {
                                 <a href="/Admin/DetailofDuplex/Upsert/${data}" class="btn-success text-white style" style="cursor:pointer">
                                     <i class="far fa-edit"></i> 
                                 </a>&nbsp
-                                <a href="/Admin/DetailofDuplex/Details/${data}" class="btn-primary text-white style" style="cursor:pointer">
-                                    <i class="fas fa-list"></i>
-                                </a>&nbsp
+                                
                                 <a onclick=Delete("/Admin/DetailofDuplex/Delete/${data}") class=" btn-danger text-white style" style="cursor:pointer">
                                     <i class="far fa-trash-alt"></i>
                                 </a>

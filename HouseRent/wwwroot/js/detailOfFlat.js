@@ -25,9 +25,7 @@ function loadDataTable() {
                                 <a href="/Admin/DetailofFlat/Edit/${data}" class="btn-success text-white style" style="cursor:pointer">
                                     <i class="far fa-edit"></i> 
                                 </a>&nbsp
-                                <a href="/Admin/SpecialTag/Details/${data}" class="btn-primary text-white style" style="cursor:pointer">
-                                    <i class="fas fa-list"></i>
-                                </a>&nbsp
+                                
                                 <a onclick=Delete("/Admin/DetailofFlat/Delete/${data}") class=" btn-danger text-white style" style="cursor:pointer">
                                     <i class="far fa-trash-alt"></i>
                                 </a>
