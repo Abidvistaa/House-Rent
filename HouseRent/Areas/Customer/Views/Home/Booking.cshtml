@@ -3,92 +3,88 @@
 @{
     ViewData["Title"] = "Booking";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var car="";
-    if (Model.CarParking==true)
-    {
-        car = "Yes";
-    }
-    else
-    {
-        car = "No";
-    }
+    
 
 }
 
 <h1>Booking</h1>
 <br />
-<div class="row ">
-    <div class="col-7">
-        <div class="form-group row">
-            <div class="col-3">
-                <label>Flat Name</label>
+<form asp-action="AddBookingSession" method="post">
+    <div class="row ">
+        <div class="col-7">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label>Flat Name</label>
+                </div>
+                <div class="col-7">
+                    @Html.DisplayFor(x => x.FlatName)
+                </div>
             </div>
-            <div class="col-7">
-                @Html.DisplayFor(x => x.FlatName)
+            <div class="form-group row">
+                <div class="col-3">
+                    <label>Floor</label>
+                </div>
+                <div class="col-7">
+                    @Html.DisplayFor(x => x.Flat.Floor)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label>Room </label>
+                </div>
+                <div class=" col-7">
+                    @Html.DisplayFor(x => x.RoomNumber)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label>Bath</label>
+                </div>
+                <div class="col-7">
+                    @Html.DisplayFor(x => x.BathNumber)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label>Price</label>
+                </div>
+                <div class="col-7">
+                    @Html.DisplayFor(x => x.Price)
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    <label>Description</label>
+                </div>
+                <div class=" col-7">
+                    <textarea readonly>@Html.DisplayFor(x=>x.Description)</textarea>
+                </div>
+            </div>
+            @if (Model.CarParking == true)
+            {
+                <div>
+                    <img src="~/images/parkingavailable.jpg" style="height:80px; width:250px;border-radius:5px;border-width:2px;" />
+                </div>
+            }
+            <br />
+            <div class="form-group row">
+                <div class="col-3">
+                    <a class="btn btn-secondary " asp-action="Index"><i class="fas fa-backward"></i>&nbsp; Back</a>
+                </div>
+                <div class="" style="padding-left:20px">
+                    <button type="submit" class="btn btn-outline-success "><i class=" far fa-check-circle"></i>&nbsp; Add On Booking</button>
+                </div>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label>Floor</label>
+        <div class="offset-">
+            <div>
+                <img src="@Model.Photo" style="height:300px; width:350px;border-radius:5px;border-width:2px;" />
             </div>
-            <div class="col-7">
-                @Html.DisplayFor(x => x.Flat.Floor)
-            </div>
+            <br />
         </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label>Room </label>
-            </div>
-            <div class=" col-7">
-                @Html.DisplayFor(x => x.RoomNumber)
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label>Bath</label>
-            </div>
-            <div class="col-7">
-                @Html.DisplayFor(x => x.BathNumber)
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label>Price</label>
-            </div>
-            <div class="col-7">
-                @Html.DisplayFor(x => x.Price)
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label>Car Parking</label>
-            </div>
-            <div class=" col-3">
-                <label>@car</label>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <label>Description</label>
-            </div>
-            <div class=" col-7">
-                <textarea readonly>@Html.DisplayFor(x=>x.Description)</textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-3">
-                <a class="btn btn-secondary "asp-action="Index"><i class="fas fa-backward"></i>&nbsp; Back</a>
-            </div>
-            <div class="" style="padding-left:20px">
-                <a class="btn btn-outline-success " asp-action=""><i class=" far fa-check-circle"></i>&nbsp; Confirm To Book</a>
-            </div>
-        </div>
+
     </div>
-    <div class="offset-">
-        <div>
-            <img src="@Model.Photo" style="height:300px; width:350px;border-radius:5px;border-width:2px;" />
-        </div>
-    </div>
-        
-</div>
+
+</form>
+
 

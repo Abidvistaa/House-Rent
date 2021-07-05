@@ -1,5 +1,6 @@
 ﻿using HouseRent.Data;
 using HouseRent.Models;
+using HouseRent.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -32,7 +33,7 @@ namespace HouseRent.Controllers
             var objD = _db.DetailOfDuplexs.ToList<DetailOfDuplex>();
             return View(objD);
         }
-
+        
         public IActionResult Booking(int? id)
         {
             var flat = _db.DetailOfFlats.Include(x => x.Flat).FirstOrDefault(x=>x.Id==id);
@@ -43,5 +44,19 @@ namespace HouseRent.Controllers
             var duplex = _db.DetailOfDuplexs.FirstOrDefault(x => x.Id == id);
             return View(duplex);
         }
+
+        [HttpPost]
+        public  IActionResult AddBookingSession(int id)
+        {
+            var flat = _db.DetailOfFlats.Include(x => x.Flat).FirstOrDefault(x => x.Id == id);
+            List<DetailOfFlat> detailOfFlats = HttpContext.Session.Get<List<DetailOfFlat>>("flats");
+            if (detailOfFlats==null) {
+                detailOfFlats = new List<DetailOfFlat>();
+            }
+            detailOfFlats.Add(flat);
+            HttpContext.Session.Set("flats", detailOfFlats);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
