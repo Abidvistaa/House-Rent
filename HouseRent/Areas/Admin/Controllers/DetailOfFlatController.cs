@@ -83,46 +83,51 @@ namespace HouseRent.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(DetailOfFlat detailOfFlat,int id)
         {
+            string webRootPath = _he.WebRootPath;
+            if (detailOfFlat.Photo != null)
+            {
+                //this is an edit and we need to remove old image
+
+                var imagePath = Path.Combine(webRootPath, detailOfFlat.Photo.TrimStart('\\'));
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
             if (ModelState.IsValid)
             {
+                
                 var files = HttpContext.Request.Form.Files;
                 if (files.Count > 0)
                 {
-                    string webRootPath = _he.WebRootPath;
                     var uploads = Path.Combine(webRootPath, @"images");
                     string filename = Guid.NewGuid().ToString();
                     var extension = Path.GetExtension(files[0].FileName);
-                    var objFromDB = _db.DetailOfFlats.Where(x => x.Id == id).FirstOrDefault<DetailOfFlat>();
-                    if (objFromDB.Photo != null)
-                    {
-                        //this is an edit and we need to remove old image
-                        var imagePath = Path.Combine(webRootPath, objFromDB.Photo.TrimStart('\\'));
-                        if (System.IO.File.Exists(imagePath))
-                        {
-                            System.IO.File.Delete(imagePath);
-                        }
-                    }
+
+                    
                     using (var fileStreams = new FileStream(Path.Combine(uploads, filename + extension), FileMode.Create))
                     {
                         files[0].CopyTo(fileStreams);
                     }
-                    objFromDB.Photo = @"\images\" + filename + extension;
-                    _db.DetailOfFlats.Update(objFromDB);
-                    //_db.Entry(detailOfFlat).State = EntityState.Modified;
-                    _db.SaveChanges();
-                    TempData["edit"] = "Updated successfully";
-                    return RedirectToAction(nameof(Index));
+                    detailOfFlat.Photo = @"\images\" + filename + extension;
                 }
-                //else
-                //{
-                //    //Update when they do not change the image
-                //    DetailOfFlat objFromDB = _db.DetailOfFlats.Where(x => x.Id == id).FirstOrDefault<DetailOfFlat>();
-                //    detailOfFlat.Photo = objFromDB.Photo;
-                //}
+                else
+                {
+                    //Update when they do not change the image
+                    if (detailOfFlat.Id != 0)
+                    {
+                        var objFromDB = _db.DetailOfFlats.Where(x => x.Id == id).FirstOrDefault<DetailOfFlat>();
+                        detailOfFlat.Photo = objFromDB.Photo;
+                    }
+                }
 
-                
+
+                _db.DetailOfFlats.Update(detailOfFlat);
+                TempData["edit"] = "Updated successfully";
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index));
             }
-            return View();
+            return View(detailOfFlat);
         }
 
         [HttpPost]
