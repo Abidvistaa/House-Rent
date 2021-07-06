@@ -34,12 +34,12 @@ namespace HouseRent.Controllers
             return View(objD);
         }
         
-        public IActionResult Booking(int? id)
+        public IActionResult FlatDetails(int? id)
         {
             var flat = _db.DetailOfFlats.Include(x => x.Flat).FirstOrDefault(x=>x.Id==id);
             return View(flat);
         }
-        public IActionResult Bookingg(int? id)
+        public IActionResult DuplexDetails(int? id)
         {
             var duplex = _db.DetailOfDuplexs.FirstOrDefault(x => x.Id == id);
             return View(duplex);
@@ -56,6 +56,19 @@ namespace HouseRent.Controllers
             detailOfFlats.Add(flat);
             HttpContext.Session.Set("flats", detailOfFlats);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult AddBookingSessionn(int id)
+        {
+            var flat = _db.DetailOfDuplexs.FirstOrDefault(x => x.Id == id);
+            List<DetailOfDuplex> detailOfDuplexs = HttpContext.Session.Get<List<DetailOfDuplex>>("duplexs");
+            if (detailOfDuplexs == null)
+            {
+                detailOfDuplexs = new List<DetailOfDuplex>();
+            }
+            detailOfDuplexs.Add(flat);
+            HttpContext.Session.Set("duplexs", detailOfDuplexs);
+            return RedirectToAction(nameof(Indexx));
         }
 
     }

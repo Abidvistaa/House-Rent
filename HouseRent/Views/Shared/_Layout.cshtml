@@ -2,12 +2,19 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{ 
-    int count = 0;
+    int count1 = 0;
+    int count2 = 0;
     List<DetailOfFlat> detailOfFlats = HttpContextAccessor.HttpContext.Session.Get<List<DetailOfFlat>>("flats");
+    List<DetailOfDuplex> detailOfDuplexs = HttpContextAccessor.HttpContext.Session.Get<List<DetailOfDuplex>>("duplexs");
     if (detailOfFlats==null) {
         detailOfFlats = new List<DetailOfFlat>();
     }
-    count = detailOfFlats.Count();
+    if(detailOfDuplexs==null){
+        detailOfDuplexs = new List<DetailOfDuplex>();
+    }
+    count1 = detailOfFlats.Count();
+    count2 = detailOfDuplexs.Count();
+
 
 }
 
@@ -52,9 +59,19 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-controller="" asp-action="" asp-area=""><i class="fas fa-poo-storm"></i>(@count) </a>
-                    </li>
+                    @if (count1 > 0)
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-controller="" asp-action="" asp-area=""><i class="fas fa-poo-storm"></i>(@count1) </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item active">
+                            <a class="nav-link" asp-controller="" asp-action="" asp-area=""><i class="fas fa-poo-storm"></i>(@count2) </a>
+                        </li>
+                    }
+
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
