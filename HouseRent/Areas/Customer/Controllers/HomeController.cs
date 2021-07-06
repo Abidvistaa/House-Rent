@@ -71,5 +71,26 @@ namespace HouseRent.Controllers
             return RedirectToAction(nameof(Indexx));
         }
 
+        public IActionResult BookingList()
+        {
+            List<DetailOfFlat> detailOfFlats = HttpContext.Session.Get<List<DetailOfFlat>>("flats");
+            return View(detailOfFlats);
+        }
+
+        public IActionResult BookingListt()
+        {
+            List<DetailOfDuplex> detailOfDuplexs = HttpContext.Session.Get<List<DetailOfDuplex>>("duplexs");
+            return View(detailOfDuplexs);
+        }
+        public ActionResult RemoveBooking(int id)
+        {
+            List<DetailOfFlat> detailOfFlats = HttpContext.Session.Get<List<DetailOfFlat>>("flats");
+            DetailOfFlat detailOfFlat = null;
+            detailOfFlat = detailOfFlats.FirstOrDefault(c => c.Id == id);
+            detailOfFlats.Remove(detailOfFlat);
+            HttpContext.Session.Set("flats", detailOfFlats);
+            return RedirectToAction(nameof(Index));
+        }
+        
     }
 }

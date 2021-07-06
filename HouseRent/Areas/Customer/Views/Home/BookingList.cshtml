@@ -1,0 +1,61 @@
+﻿@model IEnumerable<HouseRent.Models.DetailOfFlat>
+
+@{
+    ViewData["Title"] = "BookingList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var car = "";
+    }
+
+<h1>BookingList</h1>
+<div>
+    <table class="table table-bordered table-light">
+        <thead>
+            <tr>
+                <th>Flat Name</th>
+                <th>Floor</th>
+                <th>Room No</th>
+                <th>Bath No</th>
+                <th>Parking</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @if (item.CarParking == true)
+                {
+                    car = "Yes";
+                }
+                else
+                {
+                    car = "NO";
+                }
+                <tr>
+                    <td>
+                        <img src="@item.Photo" style="height:150px; width:200px" />
+                    </td>
+                    <td>@item.FlatName</td>
+                    <td>@item.Flat.Floor</td>
+                    <td>@item.RoomNumber</td>
+                    <td>@item.BathNumber</td>
+                    <td>@car</td>
+                    <td>@item.Price</td>
+                    <td> <a asp-action="RemoveBooking" asp-controller="Home" asp-area="Customer" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-4">
+        <a asp-action="Index" asp-controller="Home" asp-area="Customer" class="btn btn-secondary">Back To Home</a>
+    </div>
+    <div class="col-4 text-right">
+        <h5 style="color:red">Total Amount : @Model.Sum(c => c.Price)</h5>
+    </div>
+    <div class="col-4 text-right">
+        <a asp-action="Checkout" asp-controller="Order" asp-area="Customer" class="btn btn-outline-info">Proceed Booking</a>
+    </div>
+</div>
