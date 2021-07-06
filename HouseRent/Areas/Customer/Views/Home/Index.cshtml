@@ -11,7 +11,7 @@
             </form>
         </nav>
     </div>
-    
+
     <div id="myDIV" class="text-dark offset- text-center text-right" style="background-color:coral;width:100px">
         <h3><label>Flat</label></h3>
     </div>
@@ -29,19 +29,19 @@
                 </div>
                 <div class="card-img-wrapper">
                     <img src="@item.Photo" class="p-2 " style="height: 250px;width:250px" />
-                
-                <ul class=" list-inline text-center over-img animate">
-                    <li class=" list-inline-item ">
-                        <a class="btn btn-primary text-white"data-toggle="tooltip" data-placement="bottom" title="Sign in"  asp-action=""  asp><i class="fas fa-sign-in-alt"></i></a>
-                    </li>
-                    <li class=" list-inline-item ">
-                        <a class="btn btn-success text-white"data-toggle="tooltip" data-placement="bottom" title="Book Now"  asp-action="FlatDetails" asp-route-id="@item.Id"><i class="far fa-address-book"></i></a>
-                    </li>
-                </ul>
+
+                    <ul class=" list-inline text-center over-img animate">
+                        <li class=" list-inline-item ">
+                            <a class="btn btn-primary text-white" data-toggle="tooltip" data-placement="bottom" title="Sign in" asp-action="" asp><i class="fas fa-sign-in-alt"></i></a>
+                        </li>
+                        <li class=" list-inline-item ">
+                            <a class="btn btn-success text-white" data-toggle="tooltip" data-placement="bottom" title="Book Now" asp-action="FlatDetails" asp-route-id="@item.Id"><i class="far fa-address-book"></i></a>
+                        </li>
+                    </ul>
                 </div>
                 <div class="card-header text-center">
                     <div class="">
-                       <label style="color:tomato;font-size:14px"><b>Price : @item.Price</b></label>
+                        <label style="color:tomato;font-size:14px"><b>Price : @item.Price</b></label>
                     </div>
                     <div class="btn-group">
                         <label style="color: #336600; font-size: 14px "><b>Room : @item.RoomNumber</b></label>
@@ -52,3 +52,16 @@
     }
 </div>
 
+@section Scripts{
+
+
+    <script type="text/javascript">
+                $(function () {
+                var save = '@TempData["save"]'
+                if (save != '') {
+                alertify.success(save);
+            }
+        })
+    </script>
+
+}

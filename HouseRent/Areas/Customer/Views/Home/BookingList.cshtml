@@ -8,7 +8,7 @@
 
 <h1>BookingList</h1>
 <div>
-    <table class="table table-bordered table-light">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Flat Name</th>
@@ -56,6 +56,6 @@
         <h5 style="color:red">Total Amount : @Model.Sum(c => c.Price)</h5>
     </div>
     <div class="col-4 text-right">
-        <a asp-action="Checkout" asp-controller="Order" asp-area="Customer" class="btn btn-outline-info">Proceed Booking</a>
+        <a asp-action="Checkout" asp-controller="Booking" asp-area="Customer" class="btn btn-outline-info">Proceed Booking</a>
     </div>
 </div>

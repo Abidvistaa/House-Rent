@@ -10,8 +10,8 @@ namespace HouseRent.Models
     {
         public Booking()
         {
-            DetailOfFlat = new List<DetailOfFlat>();
-            DetailOfDuplex = new List<DetailOfDuplex>();
+            BookingDetail = new List<BookingDetail>();
+            BookingDetail2 = new List<BookingDetail2>();
         }
         public int Id { get; set; }
 
@@ -28,8 +28,8 @@ namespace HouseRent.Models
         [Required]
         public string Address { get; set; }
         public DateTime OrderDate { get; set; }
-        public virtual List<DetailOfFlat> DetailOfFlat { get; set; }
-        public virtual List<DetailOfDuplex> DetailOfDuplex { get; set; }
+        public virtual List<BookingDetail> BookingDetail { get; set; }
+        public virtual List<BookingDetail2> BookingDetail2 { get; set; }
 
     }
 }

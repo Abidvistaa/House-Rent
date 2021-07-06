@@ -1,0 +1,156 @@
+﻿@using HouseRent.Models
+@model HouseRent.Models.Booking
+@using System.Net.Http
+@using HouseRent.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Booking";
+}
+
+@{
+    List<DetailOfDuplex> detailOfDuplexs = HttpContextAccessor.HttpContext.Session.Get<List<DetailOfDuplex>>("duplexs");
+
+}
+
+<br />
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info">Pease Give Your Information</h2>
+    </div>
+</div>
+
+<br />
+<form asp-action="Checkout2" method="post">
+    <div class="row">
+        <div class="col-6">
+
+            <div asp-validation-summary="ModelOnly"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="p-4 rounded">
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="PhoneNo"></label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="PhoneNo" class="form-control" />
+                        <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Email"></label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label asp-for="Address"></label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+                        <label >Date</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" asp-for="OrderDate" class="form-control" />
+                        <span asp-validation-for="OrderDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <br />
+                <div style="padding-left:0px">
+                    <a asp-action="Indexx" asp-controller="Home" asp-area="Customer" class="btn btn-outline-secondary">Back To Home</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-5">
+            <h5 style="color:chocolate"> Booking Details</h5>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Duplex Name</th>
+                        <th>Room No</th>
+                        <th>Bath No</th>
+                        <th>Parking</th>
+                        <th>Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in detailOfDuplexs)
+                    {
+                        var car = "";
+                        @if (item.CarParking == true)
+                        {
+                            car = "Yes";
+                        }
+                        else
+                        {
+                            car = "NO";
+                        }
+                        <tr>
+                            <td>
+                                <img src="@item.Photo" style="height:150px; width:200px" />
+                            </td>
+                            <td>@item.DuplexName</td>
+                            <td>@item.RoomNumber</td>
+                            <td>@item.BathNumber</td>
+                            <td>@car</td>
+                            <td>@item.Price</td>
+                            <td> <a asp-action="RemoveBookingg" asp-controller="Home" asp-area="Customer" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <br />
+            <div style="padding-left:350px">
+                <h5 style="color:coral">Total Price : @detailOfDuplexs.Sum(c => c.Price)</h5>
+            </div>
+            <br />
+            <div style="padding-left:365px">
+                <button type="submit" class="btn btn-outline-success">Confirm Booking</button>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $("#OrderDate").datepicker({
+                showAnim: "slide",
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+    </script>
+
+
+}
+
+
+
