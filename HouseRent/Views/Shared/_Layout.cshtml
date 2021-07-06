@@ -43,9 +43,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="Customer">Home </a>
+                        <a class="nav-link" asp-controller="Home" asp-action="index" asp-area="Customer"><i class="fas fa-home" style="width:30px"></i>&nbsp;</a>
                     </li>
-
+                    &nbsp;
                     <li class="nav-item dropdown">
                         <div class="dropdown">
                             <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -68,7 +68,7 @@
                     else
                     {
                         <li class="nav-item active">
-                            <a class="nav-link" asp-controller="" asp-action="" asp-area=""><i class="fas fa-poo-storm"></i>(@count2) </a>
+                            <a class="nav-link" asp-controller="Home" asp-action="BookingListt" asp-area="Customer"><i class="fas fa-poo-storm"></i>(@count2) </a>
                         </li>
                     }
 

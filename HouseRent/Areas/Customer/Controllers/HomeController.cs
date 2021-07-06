@@ -91,6 +91,16 @@ namespace HouseRent.Controllers
             HttpContext.Session.Set("flats", detailOfFlats);
             return RedirectToAction(nameof(Index));
         }
-        
+
+        public ActionResult RemoveBookingg(int id)
+        {
+            List<DetailOfDuplex> detailOfDuplexs = HttpContext.Session.Get<List<DetailOfDuplex>>("duplexs");
+            DetailOfDuplex detailOfDuplex = null;
+            detailOfDuplex = detailOfDuplexs.FirstOrDefault(c => c.Id == id);
+            detailOfDuplexs.Remove(detailOfDuplex);
+            HttpContext.Session.Set("duplexs", detailOfDuplexs);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
