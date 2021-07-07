@@ -1,0 +1,61 @@
+﻿@model HouseRent.Models.ApplicationUser
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info"> New User</h2>
+<br />
+<form asp-action="Create" method="post" >
+    <div class="border rounded " style="width: 40%; background-color: #d9f2e6">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row p-2">
+            <div class="col-4">
+                <label>First Name</label>
+            </div>
+            <div class=" col-8">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        
+        <div class="form-group row p-2">
+            <div class=" col-4">
+                <label>Last Name</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row p-2">
+            <div class="col-4">
+                <label>UserName</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row p-2">
+            <div class="col-4">
+                <label>Password</label>
+            </div>
+            <div class="col-8">
+                <input asp-for="PasswordHash" class="form-control" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+        </div>
+        
+
+        <div class="form-group offset-6" style="padding-left:25px">
+            <a asp-action="Index" asp-controller="Home" asp-area="Customer" class="btn btn-dark">Back To List</a>
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

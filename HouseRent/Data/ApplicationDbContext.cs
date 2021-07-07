@@ -20,7 +20,7 @@ namespace HouseRent.Data
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<BookingDetail> BookingDetails { get; set; }
         public DbSet<BookingDetail2> bookingDetail2s { get; set; }
-
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
     }
 }
