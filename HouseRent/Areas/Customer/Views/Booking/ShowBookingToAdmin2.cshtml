@@ -29,17 +29,17 @@
             </tr>
             @foreach (var item in ViewBag.Show)
             {
-        <tr>
-            <td>@item.BookingNo</td>
-            <td>@item.Name</td>
-            <td>@item.PhoneNO</td>
-            <td>@item.Email</td>
-            <td>@item.Address</td>
-            <td>@item.DuplexName</td>
-            <td>
-                <img src="@item.Photo" style="height:100px;width:150px" />
-            </td>
-        </tr>
+            <tr>
+                <td>@item.BookingNo</td>
+                <td>@item.Name</td>
+                <td>@item.PhoneNO</td>
+                <td>@item.Email</td>
+                <td>@item.Address</td>
+                <td>@item.DuplexName</td>
+                <td>
+                    <img src="@item.Photo" style="height:100px;width:150px" />
+                </td>
+            </tr>
             }
         </table>
     </div>

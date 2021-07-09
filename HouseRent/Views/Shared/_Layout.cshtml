@@ -2,6 +2,8 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor HttpContextAccessor
 @{ 
+    var userRole = HttpContextAccessor.HttpContext.Session.GetString("roleName");
+
     int count1 = 0;
     int count2 = 0;
     List<DetailOfFlat> detailOfFlats = HttpContextAccessor.HttpContext.Session.Get<List<DetailOfFlat>>("flats");
@@ -46,40 +48,55 @@
                         <a class="nav-link" asp-controller="Home" asp-action="index" asp-area="Customer"><i class="fas fa-home" style="width:30px"></i>&nbsp;</a>
                     </li>
                     &nbsp;
-                    <li class="nav-item dropdown">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Action
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="PropertyType" asp-action="Index">Property Types</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="Flat" asp-action="Index">Flat's Foor</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="DetailOfFlat" asp-action="Index">Flat</a>
-                                <a class="dropdown-item" asp-area="Admin" asp-controller="DetailOfDuplex" asp-action="Index">Duplex</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                BookingList
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" asp-controller="Booking" asp-action="ShowBookingToAdmin" asp-area="Customer">FlatBookingList</a>
-                                <a class="dropdown-item" asp-controller="Booking" asp-action="ShowBookingToAdmin2" asp-area="Customer">DuplexBookingList</a>
 
+                    @if (userRole == "Admin")
+                    {
+                        <li class="nav-item dropdown">
+                            <div class="dropdown">
+                                <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="PropertyType" asp-action="Index">Property Types</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Flat" asp-action="Index">Flat's Foor</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DetailOfFlat" asp-action="Index">Flat</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="DetailOfDuplex" asp-action="Index">Duplex</a>
+                                </div>
                             </div>
-                        </div>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-controller="User" asp-action="Index" asp-area="Admin">User</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-controller="Role" asp-action="Index" asp-area="Admin">Role</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-controller="Assign" asp-action="ViewAssignUserRole" asp-area="Admin">Assign</a>
-                   
+                        </li>
+                        <li class="nav-item dropdown">
+                            <div class="dropdown">
+                                <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User&Role
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" asp-controller="User" asp-action="Index" asp-area="Admin">User</a>
+                                    <a class="dropdown-item" asp-controller="Role" asp-action="Index" asp-area="Admin">Role</a>
+                                    <a class="dropdown-item" asp-controller="Assign" asp-action="ViewAssignUserRole" asp-area="Admin">Assign</a>
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <div class="dropdown">
+                                <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Get Booking
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" asp-controller="Booking" asp-action="ShowBookingToAdmin" asp-area="Customer">FlatBooking </a>
+                                     
+                                    <a class="dropdown-item" asp-controller="Booking" asp-action="ShowBookingToAdmin2" asp-area="Customer">DuplexBooking </a>
+
+                                </div>
+                            </div>
+                        </li>
+                        
+                    }
+
+
+
+
+
                     @if (count1 > 0)
                     {
                         <li class="nav-item active">

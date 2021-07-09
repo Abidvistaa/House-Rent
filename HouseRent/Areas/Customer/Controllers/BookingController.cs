@@ -2,6 +2,7 @@
 using HouseRent.Data;
 using HouseRent.Models;
 using HouseRent.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace HouseRent.Areas.Customer.Controllers
 {
+    [Authorize]
     [Area("Customer")]
     public class BookingController : Controller
     {
@@ -29,7 +31,7 @@ namespace HouseRent.Areas.Customer.Controllers
             return View();
         }
 
-        [HttpPost]
+        
         [HttpPost]
         public IActionResult Checkout(Booking booking)
         {
@@ -97,6 +99,7 @@ namespace HouseRent.Areas.Customer.Controllers
             return View();
         }
 
+        [Authorize(Roles ="Admin")]
         public IActionResult ShowBookingToAdmin2()
         {
 

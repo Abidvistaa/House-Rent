@@ -82,4 +82,12 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+                $(function () {
+                var save = '@TempData["save"]'
+                if (save != '') {
+                alertify.success(save);
+            }
+        })
+    </script>
 }

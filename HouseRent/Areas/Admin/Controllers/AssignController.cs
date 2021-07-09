@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DeviceShop.Areas.Admin.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class AssignController : Controller
     {

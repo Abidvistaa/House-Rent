@@ -1,6 +1,7 @@
 ﻿using HouseRent.Data;
 using HouseRent.Models;
 using HouseRent.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace HouseRent.Controllers
 {
+    
     [Area("Customer")]
     public class HomeController : Controller
     {
@@ -82,6 +84,7 @@ namespace HouseRent.Controllers
             List<DetailOfDuplex> detailOfDuplexs = HttpContext.Session.Get<List<DetailOfDuplex>>("duplexs");
             return View(detailOfDuplexs);
         }
+
         public ActionResult RemoveBooking(int id)
         {
             List<DetailOfFlat> detailOfFlats = HttpContext.Session.Get<List<DetailOfFlat>>("flats");

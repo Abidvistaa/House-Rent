@@ -1,5 +1,6 @@
 ﻿using HouseRent.Data;
 using HouseRent.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace HouseRent.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Area("Admin")]
     public class UserController : Controller
     {
@@ -28,18 +30,22 @@ namespace HouseRent.Areas.Admin.Controllers
             List<ApplicationUser> applicationUsers = _db.ApplicationUsers.ToList<ApplicationUser>();
             return Json(new { data = applicationUsers });
         }
+
+        [AllowAnonymous]
         public  IActionResult Create()
         {
 
             return View();
         }
+
+        [AllowAnonymous]
         public async Task<ActionResult> Edit(string id)
         {
             var user = await _db.ApplicationUsers.FindAsync(id);
             return View(user);
         }
 
-
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Create(ApplicationUser applicationUser)
         {
@@ -47,8 +53,9 @@ namespace HouseRent.Areas.Admin.Controllers
             {
                 var result = await _userManager.CreateAsync(applicationUser,applicationUser.PasswordHash);
                 if (result.Succeeded) {
+                    var roleSave = await _userManager.AddToRoleAsync(applicationUser, "Customer");
                     TempData["save"] = "User has been created Successfully";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToPage("/Account/Login", new { area = "Identity" });
                 }
                 foreach (var error in result.Errors)
                 {
@@ -58,6 +65,7 @@ namespace HouseRent.Areas.Admin.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(ApplicationUser user)
