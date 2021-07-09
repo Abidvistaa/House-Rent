@@ -1,4 +1,5 @@
-﻿using HouseRent.Data;
+﻿using HouseRent.Areas.Customer.Models;
+using HouseRent.Data;
 using HouseRent.Models;
 using HouseRent.Utility;
 using Microsoft.AspNetCore.Mvc;
@@ -74,6 +75,46 @@ namespace HouseRent.Areas.Customer.Controllers
         {
             int rowCount = _db.Bookings.ToList().Count() + 1;
             return rowCount.ToString("000");
+        }
+
+        public IActionResult ShowBookingToAdmin()
+        {
+
+            var result = from bd in _db.BookingDetails
+                         join bk in _db.Bookings on bd.BookingId equals bk.Id
+                         join df in _db.DetailOfFlats on bd.DetailOfFlatId equals df.Id
+                         select new BookingListMappingVm()
+                         {
+                             BookingNo = bk.BookingNo,
+                             Name = bk.Name,
+                             PhoneNO= bk.PhoneNo,
+                             Email=bk.Email,
+                             Address=bk.Address,
+                             FlatName=df.FlatName,
+                             Photo=df.Photo
+                         };
+            ViewBag.Show = result;
+            return View();
+        }
+
+        public IActionResult ShowBookingToAdmin2()
+        {
+
+            var result = from bd in _db.bookingDetail2s
+                         join bk in _db.Bookings on bd.BookingId equals bk.Id
+                         join dd in _db.DetailOfDuplexs on bd.DetailOfDuplexId equals dd.Id
+                         select new BookingListMappingVm()
+                         {
+                             BookingNo = bk.BookingNo,
+                             Name = bk.Name,
+                             PhoneNO = bk.PhoneNo,
+                             Email = bk.Email,
+                             Address = bk.Address,
+                             DuplexName = dd.DuplexName,
+                             Photo = dd.Photo
+                         };
+            ViewBag.Show = result;
+            return View();
         }
     }
 }

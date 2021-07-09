@@ -59,6 +59,18 @@
                             </div>
                         </div>
                     </li>
+                    <li class="nav-item dropdown">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                BookingList
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="Booking" asp-action="ShowBookingToAdmin" asp-area="Customer">FlatBookingList</a>
+                                <a class="dropdown-item" asp-controller="Booking" asp-action="ShowBookingToAdmin2" asp-area="Customer">DuplexBookingList</a>
+
+                            </div>
+                        </div>
+                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" asp-controller="User" asp-action="Index" asp-area="Admin">User</a>
                     </li>
@@ -67,7 +79,7 @@
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" asp-controller="Assign" asp-action="ViewAssignUserRole" asp-area="Admin">Assign</a>
-                    </li>
+                   
                     @if (count1 > 0)
                     {
                         <li class="nav-item active">

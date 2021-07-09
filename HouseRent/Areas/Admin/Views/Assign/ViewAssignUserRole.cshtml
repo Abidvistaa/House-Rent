@@ -12,17 +12,16 @@
 
     </div>
     <br />
-    <div style="padding-left:280px;">
+    <div style="padding-left:230px;">
         <a asp-action="Create" class="btn btn-info"><i><i class="fas fa-plus"></i></i>&nbsp; New Assign</a>
     </div>
     <br />
 
     <div>
-        <table class="table table-striped border" style="width:50%">
+        <table class="table table-bordered " style="width:50%">
             <tr class="table-info">
                 <th>User Name</th>
                 <th>Role Name</th>
-                <th></th>
             </tr>
             @foreach (var item in ViewBag.UserRole)
             {
