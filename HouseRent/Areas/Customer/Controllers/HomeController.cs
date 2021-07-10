@@ -23,6 +23,10 @@ namespace HouseRent.Controllers
             _db = db;
 
         }
+        public IActionResult Home()
+        {
+            return View();
+        }
 
         public IActionResult Index()
         {
